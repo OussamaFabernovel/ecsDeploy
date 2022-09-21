@@ -39,7 +39,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                    docker.withRegistry('https://879010783619.dkr.ecr.eu-west-3.amazonaws.com/demo-geonaute', 'ecr:eu-west-3:aws') {
+                    docker.withRegistry('https://879010783619.dkr.ecr.eu-west-3.amazonaws.com', 'ecr:eu-west-3:aws') {
                     //app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
