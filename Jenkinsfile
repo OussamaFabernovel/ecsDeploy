@@ -30,11 +30,21 @@ pipeline {
             steps {
                 //withCredentials([string(credentialsId: 'AWS_REPOSITORY_URL_SECRET', variable: 'AWS_ECR_URL')]) {
                     script {
-                        app = docker.build("ouss:0.0.1")
+                        app = docker.build("demo:0.0.1")
                     }
                 //}
             }
         }
+
+        stage('Deploy') {
+            steps {
+                script{
+                        docker.withRegistry('https://879010783619.dkr.ecr.eu-west-3.amazonaws.com/demo-geonaute', 'ecr:eu-west-3:aws') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                    }
+                }
+            }
 
     }
 }
